@@ -1,0 +1,82 @@
+[DB 생성-admin등록]
+1.db생성확인
+python manage.py makemigrations
+
+2.db생성
+python manage.py migrate
+
+3.admin등록
+python manage.py createsuperuser
+username:
+email:
+password:
+password(again):
+pw사용여부(Y/N)
+
+[db관련 명령어-select,insert,update,delete]
+[레코드 다루기]
+
+python manage.py shell > shell DOS창으로 이동
+from member.models import Member=>table을 import하기
+
+1.데이터 저장(insert)
+1-1.
+qs = Member(id='aaa',pw='1111',name='홍길동',age=20,phone='010-1111-1111',gender='남자',hobby='게임')
+qs.save()
+
+1-2.
+Member.objects.create(id='hhh',pw='1111',name='김유신',age=25,phone='010-8888-8888',gender='남자',hobby='게임,수영')
+
+1-3.
+Member(id='iii',pw='1111',name='제임스',age=20,phone='010-9999-9999',gender='남자',hobby='등산,골프').save()
+
+2.데이터 검색(select)
+2-1. all()검색
+Member.objects.all()=>select * from Member
+
+2-2. get()검색-특정한 1개
+Member.objects.get(id='aaa')=>select * from Member where id='aaa'
+
+2-3. filter()검색-2개이상
+Member.objects.filter(age=20)=>select * from Member where age=20
+
+3.데이터 수정(update)
+1)데이터 검색
+qs=Member.objects.get(id='aaa')
+2)원하는 컬럼값 변경
+qs.name='홍길스'
+qs.age=50
+qs.save()
+
+4.데이터 삭제(delete)
+1)데이터 검색
+qs=Member.objects.get(id='aaa')
+2)삭제
+qs.delete()
+
+※ 특정컬럼만 검색
+Member.objects.values('name')
+
+※ 파일존재확인: exists()
+Member.objects.filter(age=30).exists()
+
+※ __contains : select * from Member where name like '%순%'
+Member.objects.filter(name__contains='순')
+
+※ __startswith, __endswith
+Member.objects.filter(name__startswith='홍')
+=>select * from Member where name like '홍%'
+Member.objects.filter(name__endswith='순')
+=>select * from Member where name like '%순'
+
+※ 비교구문(gt,gte,lt,lte)
+gt : greater than
+gte :
+lt : less than
+lte
+Member.objects.filter(age__gte=21)
+Member.objects.filter(age__lt=21)
+
+※ 정렬 .order_by() (+/-)
+Member.objects.order_by('age') (순asc)
+Member.objects.order_by('-age') (역순desc)
