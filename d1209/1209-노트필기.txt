@@ -1,3 +1,25 @@
+# 테이블 생성-sql구문 python명령어로 대체
+class Member(models.Model):
+    id=models.CharField(max_length=100,primary_key=True)
+    pw=models.CharField(max_length=100)
+    name=models.CharField(max_length=100)
+    age=models.IntegerField(default=0)
+    phone=models.CharField(max_length=13)
+    gender=models.CharField(max_length=10)
+    hobby=models.CharField(max_length=100)
+
+# 객체출력 - 주소값,__str__객체를 문자열로 출력
+    def __str__(self):
+        return f"{self.id},{self.name},{self.age},{self.gender}"
+
+# admin에서 열람 및 수정 가능하게 models 등록
+# member app에서 models 파일안의 Member class 가져옴
+from member.models import Member
+
+# Register your models here.
+admin.site.register(Member)
+
+
 [DB 생성-admin등록]
 1.db생성확인
 python manage.py makemigrations
@@ -15,13 +37,15 @@ pw사용여부(Y/N)
 
 [db관련 명령어-select,insert,update,delete]
 [레코드 다루기]
+models<=>admin 연결
 
 python manage.py shell > shell DOS창으로 이동
 from member.models import Member=>table을 import하기
 
+
 1.데이터 저장(insert)
 1-1.
-qs = Member(id='aaa',pw='1111',name='홍길동',age=20,phone='010-1111-1111',gender='남자',hobby='게임')
+qs = Student(id='aaa',pw='1111',name='홍길동',age=20,phone='010-1111-1111',gender='남자',hobby='게임')
 qs.save()
 
 1-2.
@@ -80,3 +104,6 @@ Member.objects.filter(age__lt=21)
 ※ 정렬 .order_by() (+/-)
 Member.objects.order_by('age') (순asc)
 Member.objects.order_by('-age') (역순desc)
+
+
+stuproject>>ssproject
