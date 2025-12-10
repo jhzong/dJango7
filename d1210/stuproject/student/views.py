@@ -38,7 +38,7 @@ def list(request):
 # view함수
 def view(request,sno):
     # age = request.GET['age']# 데이터 없으면 에러(restful 나중에 공부)
-    print("넘어온 데이타 sno :",sno)
+    # print("넘어온 데이타 sno :",sno)
     qs=Student.objects.get(sno=sno)
     context={"student":qs}
     return render(request, 'student/view.html', context)
