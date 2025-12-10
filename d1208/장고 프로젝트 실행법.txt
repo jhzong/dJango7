@@ -1,0 +1,24 @@
+[장고 초중요]
+1. 폴더 확인
+cd C:\workspace\django7\d1208 폴더
+2. 프로젝트 생성
+django-admin startproject stupjt01
+3. app생성
+python manage.py startapp student
+4. stupjt01 > setting.py
+INSTALLED_APPS -> 앱등록을 해야 함.
+5. urls.py
+from django.urls import path,include
+urlpatterns 부분에
+path('student/', include('student.urls')), 추가
+6. student app > urls 이동
+from . import views 상단추가
+app_name='student' 추가
+urlpatterns에
+path('write/', views.write,name='write'), 추가
+7. views.py
+def write(request):
+    return render(request,'write.html') 추가
+8. templates 폴더 생성후 > write.html 추가
+9. 프로젝트 폴더 이동후 > 서버 실행
+python manage.py runserver

@@ -1,0 +1,39 @@
+# static files 구문
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static'),
+]
+
+# migation 기록 명령어
+python manage.py showmigrations(migation 기록)
+
+----------------------------------------------------------------
+# # django-html 문법(views-list)
+※ 변수
+qs=class명.objects.all()
+context={"A":qs}
+※ for문
+{% for s in list %}{% endfor %}
+※ if문
+{% if list %}{% elif %}{% else %}{% endif %}
+
+# 주석
+<!--html주석-->
+{% comment "" %}django주석{% endcomment %}
+
+# 주소 쓰는법
+※ url링크방식,절대경로,피지털주소
+href='/부모/자식'
+※ app이름링크,상대경로
+{% url '부모:자식' %}
+
+※ f12 payload가 없으면 html 오류
+※ cmd terminal에 값이 없으면 python 오류
+
+-------------------------------------------------
+# 링크주소
+※app_name url(django방식-권장)※
+a href="{% url 'student:view' s.sno s.name %}"
+rest API url
+/student/{{s.sno}}/view/
+app 이름 url
+파라미터
