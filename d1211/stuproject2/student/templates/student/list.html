@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    h2{text-align:center;}
+    table{margin:0 auto;}
+    table,th,td{border:1px solid black; border-collapse:collapse;}
+    th,td{width:150px; height:40px; text-align:center;}
+    #btn{width:800px; height:50px; margin: 30px auto; border:none;}
+    .d01{width:200px; height:50px; text-align:center;
+    border:1px solid black; margin:0 auto; line-height:50px;
+    background:#eee;}
+    a{text-decoation:none;}
+
+</style>
+<body>
+    <h2>학생명부</h2>
+    <h2>{{list}}</h2>
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>나이</th>
+            <th>학년</th>
+            <th>성별</th>
+            <th>취미</th>
+        </tr>
+        {% if list %}
+        <tr>
+            <td>1</td>
+            <td>홍길동</td>
+            <td>20</td>
+            <td>1</td>
+            <td>남자</td>
+            <td>취미</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan='6'></td>
+        </tr>
+        {% endif %}
+    </table>
+    <div id='btn'>
+        <div class='d01'><a href="{% url 'student:write' %}">학생 등록하기</a></div>
+    </div>
+</body>
+</html>
