@@ -47,15 +47,18 @@ def update(request, sno):
         context={'stu':qs}
         return render(request, 'student/update.html', context)
     elif request.method=='POST':
-        # sno=request.POST.get('sno')# AuteField여서 생략가능
         name=request.POST.get('name')
         age=request.POST.get('age')
         grade=request.POST.get('grade')
         gender=request.POST.get('gender')
         hobby=request.POST.getlist('hobby')
-        # models.py-Student에 저장(qs.save()/Table.objects.create()/Table().save())
-        qs=Student(name=name,age=age,grade=grade,gender=gender,hobby=hobby)
+        # models.py-Student에 수정내용 저장
+        qs=Student.objects.get(sno=sno)
+        qs.name=name
+        qs.age=age
+        qs.grade=grade
+        qs.gender=gender
+        qs.hobby=hobby
         qs.save()
         print('post 확인 :',name)
-        # return render(request,'student/list.html')# url 주소는 그대로 studnt/write로 유지됨
-        return redirect(reverse('student:list'))# url주소를 바꿔줌
+        return redirect(reverse('student:list'))

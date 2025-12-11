@@ -51,3 +51,32 @@ def view(request,sno):
     qs=Student.objects.get(sno=sno)
     context={'stu':qs}
     return render(request, 'student/view.html', context)
+
+4.delete
+def delete(request, sno):
+    qs=Student.objects.get(sno=sno)
+    qs.delete() # 삭제문
+    return redirect(reverse('student:list'))
+
+5.update
+def update(request, sno):
+    if request.method=='GET':
+        qs=Student.objects.get(sno=sno)
+        context={'stu':qs}
+        return render(request, 'student/update.html', context)
+    elif request.method=='POST':
+        name=request.POST.get('name')
+        age=request.POST.get('age')
+        grade=request.POST.get('grade')
+        gender=request.POST.get('gender')
+        hobby=request.POST.getlist('hobby')
+        # models.py-Student에 수정내용 저장
+        qs=Student.objects.get(sno=sno)
+        qs.name=name
+        qs.age=age
+        qs.grade=grade
+        qs.gender=gender
+        qs.hobby=hobby
+        qs.save()
+        print('post 확인 :',name)
+        return redirect(reverse('student:list'))
