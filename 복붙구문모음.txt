@@ -1,0 +1,53 @@
+※cmd 서버실행 명령어※
+python manage.py runserver
+
+※settings.py STATICFILES 추가구문※
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'static'),
+]
+
+※models.py class 기본 frame※
+class Table(models.Model):
+    a=models.AutoField(primary_key=True)# AutoField=Sequence
+    b=models.CharField(max_length=100)# CharField=VarChar2
+    c=models.IntegerField(default=1)# IntegerField=Number
+    d=models.IntegerField(default=1)# 입력값이 없으면 default값
+    e=models.CharField(max_length=10)
+    
+    def __str__(self):
+        return f"{self.a},{self.b},{self.c},{self.d},{self.e}"
+
+※admin.py에 Table에 대한 관리가 권한 부여※
++from student.models import Table
++admin.site.register(Table)
+
+※views.py 구문(write,list,view,index)※
+from django.shortcuts import render, +redirect
++from django.urls import reverse
++from student.models import Table
+
+1.write
+def write(request):
+    if request.method=='GET':
+        return render(request, 'A/write.html')
+    elif request.method=='POST':
+        a=request.POST.get('a')
+        b=request.POST.get('b')
+        c=request.POST.get('c')
+        d=request.POST.get('d')
+        e=request.POST.getlist('e')
+        qs=Table(a=a,b=b,c=c,d=d,e=e)
+        qs.save()
+        return redirect(reverse('A:list'))
+
+2.list
+def list(request):
+    qs=Table.objects.all()
+    context={'list':qs}
+    return render(request, 'student/list.html',context)
+
+3.view
+def view(request,sno):
+    qs=Student.objects.get(sno=sno)
+    context={'stu':qs}
+    return render(request, 'student/view.html', context)
