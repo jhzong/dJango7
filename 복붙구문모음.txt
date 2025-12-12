@@ -18,18 +18,18 @@ class Table(models.Model):
         return f"{self.a},{self.b},{self.c},{self.d},{self.e}"
 
 ※admin.py에 Table에 대한 관리가 권한 부여※
-+from student.models import Table
++from app_name.models import Table
 +admin.site.register(Table)
 
 ※views.py 구문(write,list,view,index)※
 from django.shortcuts import render, +redirect
 +from django.urls import reverse
-+from student.models import Table
++from app_name.models import Table
 
 1.write
 def write(request):
     if request.method=='GET':
-        return render(request, 'A/write.html')
+        return render(request, 'app_name/write.html')
     elif request.method=='POST':
         a=request.POST.get('a')
         b=request.POST.get('b')
@@ -38,45 +38,44 @@ def write(request):
         e=request.POST.getlist('e')
         qs=Table(a=a,b=b,c=c,d=d,e=e)
         qs.save()
-        return redirect(reverse('A:list'))
+        return redirect(reverse('app_name:list'))
 
 2.list
 def list(request):
     qs=Table.objects.all()
     context={'list':qs}
-    return render(request, 'student/list.html',context)
+    return render(request, 'app_name/list.html',context)
 
 3.view
-def view(request,sno):
-    qs=Student.objects.get(sno=sno)
-    context={'stu':qs}
-    return render(request, 'student/view.html', context)
+def view(request,a):
+    qs=app_name.objects.get(a=a)
+    context={'A':qs}
+    return render(request, 'app_name/view.html', context)
 
 4.delete
-def delete(request, sno):
-    qs=Student.objects.get(sno=sno)
+def delete(request, a):
+    qs=app_name.objects.get(a=a)
     qs.delete() # 삭제문
-    return redirect(reverse('student:list'))
+    return redirect(reverse('app_name:list'))
 
 5.update
-def update(request, sno):
+def update(request, a):
     if request.method=='GET':
-        qs=Student.objects.get(sno=sno)
-        context={'stu':qs}
-        return render(request, 'student/update.html', context)
+        qs=app_name.objects.get(a=a)
+        context={'A':qs}
+        return render(request, 'app_name/update.html', context)
     elif request.method=='POST':
-        name=request.POST.get('name')
-        age=request.POST.get('age')
-        grade=request.POST.get('grade')
-        gender=request.POST.get('gender')
-        hobby=request.POST.getlist('hobby')
-        # models.py-Student에 수정내용 저장
-        qs=Student.objects.get(sno=sno)
-        qs.name=name
-        qs.age=age
-        qs.grade=grade
-        qs.gender=gender
-        qs.hobby=hobby
+        a=request.POST.get('a')
+        b=request.POST.get('b')
+        c=request.POST.get('c')
+        d=request.POST.get('d')
+        e=request.POST.getlist('e')
+        # models.py-Table에 수정내용 저장
+        qs=app_name.objects.get(p=p)# 'P'rimary key
+        qs.a=a
+        qs.b=b
+        qs.c=c
+        qs.d=d
+        qs.e=e
         qs.save()
-        print('post 확인 :',name)
-        return redirect(reverse('student:list'))
+        return redirect(reverse('app_name:list'))

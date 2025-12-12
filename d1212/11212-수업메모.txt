@@ -1,0 +1,21 @@
+※ COOKIES
+# 쿠키검색
+request.COOKIES=>모두검색
+request.COOKIES.get('cook_id')=>특정쿠키 검색
+
+# 쿠키저장
+response.set_cookie('key','value',max_age=time)
+
+# 쿠키삭제
+response.delete_cookie('cook_id')
+
+※ SESSION
+# session 검색
+request.session.session_id
+
+# session 저장
+request.session['session_id']='aaa'
+
+# session 삭제
+del request.session['session_id']=>특정 session
+request.session.clear()=>전체 session
