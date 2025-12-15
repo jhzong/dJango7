@@ -5,10 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VLAST Shop - 로그인</title>
   <link rel="stylesheet" href="/static/css/login_style.css">
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
   <style>
     
   </style>
-  <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+  <script>
+    if("{{flag}}"=="1"){
+      alert('로그인합니다.');
+      window.location.href='/';
+    }else if("{{flag}}"=="0"){
+      alert('아이디 또는 패스워드가 일치하지 않습니다.');
+    }else if("{{flag}}"=="-1"){
+      alert('로그아웃합니다.');
+      window.location.href='/';
+    }
+  </script>
 </head>
 <body>
   <div class="header">
@@ -27,9 +39,10 @@
   <div class="container">
     <div class="login-box">
       <h1>로그인</h1>
-      <form>
-        <input type="text" placeholder="아이디" class="input-box" required>
-        <input type="password" placeholder="비밀번호" class="input-box" required>
+      <form action="/member/login/" method="post">
+        {% csrf_token %}
+        <input type="text" name='id' placeholder="아이디" class="input-box" required>
+        <input type="password" name='pw' placeholder="비밀번호" class="input-box" required>
         <button type="submit" class="btn btn-login">로그인</button>
       </form>
       <div class="links">
