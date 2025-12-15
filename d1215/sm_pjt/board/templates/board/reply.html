@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VLAST Shop - 글쓰기</title>
+  <title>VLAST Shop - 글수정</title>
   <script>
     if('{{request.session.session_id}}'==''){
       alert('글을 쓰려면 로그인이 필요합니다.');
@@ -118,7 +118,7 @@
   </style>
   <script>
     if('{{flag}}'=='1'){
-      alert('게시글을 등록합니다.');
+      alert('게시글에 답변합니다.');
       location.href='/board/list/';
     }
   </script>
@@ -135,17 +135,24 @@
     </div>
   </div>
 
-  <!-- 글쓰기 폼 -->
+  <!-- 글수정 폼 -->
   <div class="write-container">
-    <div class="write-title">게시글 작성</div>
-    <form class="write-form" id="writeForm" action='{% url "board:write" %}' method='post'>
+    <div class="write-title">게시글 답변</div>
+    <form class="write-form" id="writeForm" action="{% url 'board:reply' board.bno %}" method='post'>
       {% csrf_token %}
+      
+      <input type="hidden" name='bgroup' value="{{board.bgroup}}"  />
+      <input type="hidden" name='bstep' value="{{board.bgroup}}"  />
+      <input type="hidden" name='bindent' value="{{board.bgroup}}"  />
       <input type="text" name='id' id="writer" placeholder="작성자" maxlength="20" value="{{request.session.session_id}}" disabled />
-      <input type="text" name='btitle' id="title" placeholder="제목" maxlength="100" required />
-      <textarea name='bcontent' id="content" placeholder="내용을 입력하세요." maxlength="2000" required></textarea>
+      <input type="text" name='btitle' id="title" placeholder="제목" maxlength="100" value="[답변]{{board.btitle}}" required />
+      <textarea name='bcontent' id="content" placeholder="내용을 입력하세요." maxlength="2000" required>{{board.bcontent}}
+----------------------------------------------------------
+[답변]
+</textarea>   
 
       <div class="write-buttons">
-        <button type="submit">등록</button>
+        <button type="submit">답글</button>
         <button type="button" class="cancel" onclick="history.back()">취소</button>
       </div>
     </form>
