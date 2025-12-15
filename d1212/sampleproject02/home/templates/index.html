@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>메인페이지</h2>
+
+    <h3>로그인을 하시오</h3>
+    <ul>
+        <li><a href="/member/login">로그인</a></li>
+        <li><a href="/member/notice">회원안내</a></li>
+        <li><a href="/member/write">회원등록</a></li><br>
+    </ul>
+
+    <h3>{{request.session.session_name}}님 환영합니다.</h3>
+    <ul>
+        <li><a href="/member/logout">로그아웃</a></li>
+        <li><a href="/member/list">회원리스트</a></li>
+        <li><a href="/admin">관리자모드</a></li>
+    </ul>    
+
+</body>
+</html>

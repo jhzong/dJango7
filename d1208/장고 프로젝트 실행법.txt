@@ -1,3 +1,10 @@
+[설치]
+-python –m pip install --upgrade pip
+-pip install Django
+[확장]
+-Django
+-Auto Close Tag
+-autoDocstring
 [장고 초중요]
 1. 폴더 확인
 cd C:\workspace\django7\d1208 폴더
