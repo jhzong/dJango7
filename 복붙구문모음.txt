@@ -82,3 +82,5 @@ def update(request, a):
         qs.e=e
         qs.save()
         return redirect(reverse('app_name:list'))
+
+※views.py session구문(검색,저장,삭제)※
