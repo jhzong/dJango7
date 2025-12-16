@@ -275,11 +275,20 @@
     <div class="detail-content">
       {{board.bcontent}}
     </div>
+    <!-- 첨부 이미지 미리보기(썸네일)-->
+    {% if board.bfile %}
+    <img src="/media/{{board.bfile}}" style='width:150px;'>
+    {% else %}
+    <div>첨부 이미지가 없습니다.</div>
+    {% endif %}
+    <!-- /첨부 이미지 미리보기(썸네일)-->
     <div class="detail-buttons">
       <a href="/board/list/">목록으로</a>
       <a href="/board/reply/{{board.bno}}/">답글달기</a>
+      {% if board.member.id == request.session.session_id %}<!--작성자만 보임-->
       <a href="/board/update/{{board.bno}}/">수정</a>
       <button id="deleteBtn">삭제</button>
+      {% endif %}
     </div>
   </div>
 

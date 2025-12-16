@@ -118,3 +118,7 @@ function readURL(input){
 enctype="multipart/form-data"
 # views 데이터 불러오기 구문 변경(POST->FILES)
 bfile=request.FILES.get('bfile')
+
+
+# from django.core.paginator import Paginator
+paginator=Paginator(qs,10)->1페이지에 10개씩

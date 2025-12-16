@@ -300,13 +300,43 @@
     <!-- Pagination & Search -->
     <div class="board-footer" >
         <div class="pagination">
-            <a href="#">&laquo;</a>
-            <a href="#" class="active">1</a>
-            <a href="#">2</a>
-            <a href="#">3</a>
-            <a href="#">4</a>
-            <a href="#">5</a>
-            <a href="#">&raquo;</a>
+          <!-- 처음&다음 페이지-->
+          {% if list.has_previous %}
+            <a href="/board/list/?page=1">&laquo;</a>
+            <a href="/board/list/?page={{list.previous_page_number}}">&lt;</a>
+          {% else %}
+            <a>&laquo;</a>
+            <a>&lt;</a>
+          {% endif %}  
+          
+          <!--하단 페이지 넘버링-->
+          {% for p in list.paginator.page_range %}
+            {% if p >= list.number|add:'-3' and p <= list.number|add:'3' %}
+              {% if p == list.number %}
+                <a class="active">{{p}}</a>
+              {% else %}
+                <a href="/board/list/?page={{p}}">{{p}}</a>
+              {% endif %}
+            {% endif %}
+          
+          {% comment %}
+          {% if p == page %}
+            <a class="active">{{p}}</a>
+          {% else %}
+            <a href="/board/list/?page={{p}}">{{p}}</a>
+          {% endif %}
+          {% endcomment %}
+          
+          {% endfor %}
+          
+          <!-- 다음&마지막 페이지-->
+          {% if list.has_next %}
+            <a href="/board/list/?page={{list.next_page_number}}">&gt;</a>
+            <a href="/board/list/?page={{list.paginator.num_pages}}">&raquo;</a>
+          {% else %}
+            <a>&gt;</a>
+            <a>&raquo;</a>
+          {% endif %}
         </div>
         <div class="search-box">
             <input type="text" placeholder="검색어 입력">
