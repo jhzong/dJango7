@@ -84,3 +84,37 @@ def update(request, a):
         return redirect(reverse('app_name:list'))
 
 ※views.py session구문(검색,저장,삭제)※
+
+
+# 파일업로드 추가구문
+※ settings.py 추가
+# url정보가 /media 로 들어오면 media폴더로 연결
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+※ urls.py 추가
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL,
+             document_root = settings.MEDIA_ROOT )
+
+// 이미지 업로드시 이미지 미리보기 함수
+function readURL(input){
+    // 파일첨부가 있으면
+    if(input.files && input.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            document.getElementById('preview').src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }else{
+        // 없을 경우 빈공백 처리
+        document.getElementById('preview').src = '';
+    }
+}
+
+# form 추가구문
+enctype="multipart/form-data"
+# views 데이터 불러오기 구문 변경(POST->FILES)
+bfile=request.FILES.get('bfile')
