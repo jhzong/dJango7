@@ -24,6 +24,13 @@ def write(request):
         return render(request,'board/write.html',context)
 
 # <게시글 상세보기>---------------------------------------------
-def view(request):
-    
-    return render(request,'board/view.html')
+def view(request, bno):
+    qs=Board.objects.get(bno=bno)
+    context={'detail':qs}
+    return render(request,'board/view.html',context)
+
+# <게시글 삭제(상세보기)>----------------------------------------
+def delete(request, bno):
+    qs=Board.objects.get(bno=bno)
+    qs.delete()
+    return redirect('/board/list/')
