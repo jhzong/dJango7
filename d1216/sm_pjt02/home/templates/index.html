@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>메인페이지</h2>
+    <ul>
+    {% if not request.session.session_id %}
+        <li><a href="/member/login">로그인</a></li>
+        <li><a href="/admin">관리자모드</a></li>
+    {% else %}
+        <li><a href="/member/logout">로그아웃</a></li>
+        <li><a href="/board/list">게시판</a></li>
+        <li><a href="/admin">관리자모드</a></li>
+    {% endif %}
+    </ul>
+</body>
+</html>
