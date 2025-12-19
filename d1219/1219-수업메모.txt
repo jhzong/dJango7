@@ -1,0 +1,17 @@
+1. 댓글 쓰고
+2. 댓글 등록 버튼 누르면
+3. 자바스크립트가 ajax로 서버한테 댓글 저장시킨다.
+4. django가 db에 댓글 적는다.(저장)
+5. django가 화면에 띄운다..?
+6. 그래서 새로고침 안해도 보임
+
+# 댓글
+1. comment app 생성
+- setting.py 추가
+- urls.py 추가
+- comment>urls.py 추가
+2. comment db생성
+- comment>clist 추가
+3. board>def view -> comment 101번 하단댓글 가져오기
+- comment db에서 하단댓글list 가져오기
+4. comment write 프로그램

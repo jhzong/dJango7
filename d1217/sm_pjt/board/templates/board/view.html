@@ -1,24 +1,22 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <meta name='csrf_token' content='{{csrf_token}}' >
-  <title>VLAST Shop - 게시글 상세보기</title>
-  <link rel='stylesheet' href='{% static "css/view.css" %}'>
-  <script>
-  </script>
 
-</head>
-<body>
+{% block title-block %}
+<title>VLAST Shop - 상세보기페이지</title>
+{% endblock title-block %}
+
+{% block css-block %}
+<link rel='stylesheet' href='{% static "css/view.css" %}'>
+{% endblock css-block %}
+
+
+{% block body-block %}
 
   <!-- Header -->
   <div class="header">
     <div class="top-menu">
       <a href="#">회원가입</a> |
-      <a href="#">로그인</a> |
+      <a href="/member/login/">로그인</a> |
       <a href="#">주문조회</a> |
       <a href="#">최근본상품</a>
     </div>
@@ -29,7 +27,7 @@
     </div>
   </div>
 
-  <!-- Detail View -->
+  <!-- 개별 : Detail View -->
   <div class="detail-container">
     <div class="detail-title">{{board.btitle}}</div>
     <div class="detail-info">
@@ -96,11 +94,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Footer -->
-  <footer>
-    Copyright © VLAST Shop. All rights reserved.
-  </footer>
+{% endblock body-block %}
 
   <script>
   //전역변수 선언
@@ -317,5 +311,4 @@
         .replace(/'/g, "&#039;");
     }
   </script>
-</body>
-</html>
+
