@@ -106,6 +106,15 @@ def list(request):
     context = {'list':list_qs,'page':page}
     return render(request,'board/list.html',context)
 
+#--------------------------------------------------------------------------------------
+import requests
+# 공공데이터 리스트 - API
+def list2(request):
+    public_key=''
+    context = {'result':'성공'}
+    return render(request,'board/list2.html',context)
+#--------------------------------------------------------------------------------------
+
 # 게시판 글쓰기
 def write(request):
     if request.method == 'GET':
