@@ -4,7 +4,9 @@ from comment.models import Comment
 from member.models import Member
 from django.db.models import F,Q
 from django.core.paginator import Paginator
-
+import requests
+import json
+import pprint
 
 # 차트 그리기
 def chart(request):
@@ -107,12 +109,44 @@ def list(request):
     return render(request,'board/list.html',context)
 
 #--------------------------------------------------------------------------------------
-import requests
-# 공공데이터 리스트 - API
+## 상단에 추가
+# import requests
+# import json
+# import pprint
+
+# 공공데이터 리스트 - API(관광정보)
 def list2(request):
-    public_key=''
-    context = {'result':'성공'}
+    # 공공데이터 접속
+    public_key='29b0b931e96abea5be6407185e36ed3cb76294a1ee46ef38a702ee3acf6d5c79'
+    # page_no=requests.GET.get('page_no')
+    page_no=1
+    url=f"https://apis.data.go.kr/B551011/PhotoGalleryService1/galleryList1?serviceKey={public_key}&numOfRows=10&pageNo={page_no}&MobileOS=ETC&MobileApp=AppTest&arrange=A&_type=json"
+    # url의 모든 태그를 가져옴
+    # 공공데이터 정보 가져오기
+    rel=requests.get(url)
+    # 파일변환:str->json
+    json_data=json.loads(rel.text)
+    p_list=json_data['response']['body']['items']['item']
+    print('[json데이터]=>',p_list[0])    
+    context = {'result':'성공','list':p_list}
     return render(request,'board/list2.html',context)
+#--------------------------------------------------------------------------------------
+# 공공데이터 리스트 - API(영화정보)
+def list3(request):
+    # 공공데이터 접속
+    public_key='354a8a2eb23f2ffd9a5d4e6e4f6d3cc7'
+    # # page_no=requests.GET.get('page_no')
+    # page_no=1
+    url=f"http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key={public_key}&targetDt=20251130"
+    # url의 모든 태그를 가져옴
+    # 공공데이터 정보 가져오기
+    rel=requests.get(url)
+    # 파일변환:str->json
+    json_data=json.loads(rel.text)
+    p_list=json_data['boxOfficeResult']['dailyBoxOfficeList']
+    print('[json데이터]=>',p_list[0])    
+    context = {'list':p_list}
+    return render(request,'board/list3.html',context)
 #--------------------------------------------------------------------------------------
 
 # 게시판 글쓰기

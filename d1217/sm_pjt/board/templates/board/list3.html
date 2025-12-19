@@ -17,29 +17,29 @@
     <table class="board-table">
       <colgroup>
         <col width='10%'>
-        <col width='15%'>
-        <col width='15%'>
-        <col width='15%'>
+        <col width='10%'>
         <col width='*'>
+        <col width='15%'>
+        <col width='10%'>
       </colgroup>
       <thead>
         <tr>
           <th>번호</th>
+          <th>순위</th>
           <th>제목</th>
-          <th>작가</th>
-          <th>촬영일</th>
-          <th>이미지</th>
+          <th>개봉일</th>
+          <th>상영횟수</th>
         </tr>
       </thead>
       <tbody>
         {% if list %}
-        {% for g in list  %}
+        {% for m in list  %}
         <tr>
-              <td>{{g.galContentId}}</td>
-              <td class="title">{{g.galTitle}}</td>
-              <td>{{g.galPhotographer}}</td>
-              <td class="date">{{g.galPhotographyMonth}}</td>
-              <td class="views"><img src="{{g.galWebImageUrl}}" style="width:200px;"></td>
+              <td>{{m.rank}}</td>
+              <td class="title">{{m.rankInten}}</td>
+              <td>{{m.movieNm}}</td>
+              <td class="date">{{m.openDt}}</td>
+              <td class="views">{{m.audiAcc}}</td>
             </tr>
             {% endfor %}
             {% else %}

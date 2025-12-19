@@ -131,10 +131,35 @@ del request.session['key']
 4.전체삭제
 request.session.clear()
 
+# 공공 API 불러오기/출력 views.py
+# 상단에 추가
+import requests
+import json
+import pprint
+
+def list(request):
+    # 공공데이터 접속
+    public_key='인증키'
+    # page_no=requests.GET.get('page_no')
+    page_no=1
+    url=f"API응답주소?Key={public_key}&요청변수"
+    # 공공데이터 정보 가져오기
+    rel=requests.get(url)
+    # 파일변환:str->json
+    json_data=json.loads(rel.text)
+    p_list=json_data['response']['body']['items']['item']
+    # 테스트
+    print('[json데이터]=>',p_list[0])    
+    context = {'result':'성공','list':p_list}
+    return render(request,'board/list.html',context)
+
+
+
+
+
 from django.forms.models import model_to_dict
 from django.http import JsonResponse,HttpResponse # 전송할때 Json타입으로 변경해서 전송
 from django.core import serializers  # Json타입으로 전달된 데이터를 파이썬데이터(set)로 변경
-4:05
 from django.shortcuts import render
 from django.forms.models import model_to_dict
 from django.http import JsonResponse,HttpResponse # 전송할때 Json타입으로 변경해서 전송
