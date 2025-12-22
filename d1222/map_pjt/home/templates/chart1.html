@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>차트 그리기</title>
+</head>
+<body>
+    <div>
+        <h2>차트 그리기</h2>
+        <input type="text" name="m_data" id="m_data">
+        <button type="button" onclick="chartBtn()">데이터 가져오기</button>
+    </div>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+
+<script>
+    function chartBtn(){
+        alert('데이타를 가져옵니다.')
+        let input_data=$('#m_data').val()
+
+        $.ajax({
+            url:'/chart_json1/',
+            type:'get',
+            dataType:'json',
+            data:{'input_data':input_data},
+            success:function(data){
+                console.log(data)
+                alert('데이터 전송성공')
+                const ctx = document.getElementById('myChart');
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: '연간수입',
+                        data: data.values,
+                        borderWidth: 1
+                    }]
+                    },
+                    options: {
+                    scales: {
+                        y: {
+                        beginAtZero: true
+                        }
+                    }
+                    }
+                });
+            },//success
+            error:function(){
+                alert('데이터 전송실패')
+            }
+        })//ajax
+    }//chartBtn()
+</script>    
+</body>
+</html>
