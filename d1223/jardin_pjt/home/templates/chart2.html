@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script><!--jquery 최신-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--chart.js query-->
+    <title>차트그리기-실습</title>
+    <style>
+        #chart_back{width: 800px; height600px; border:1px solid black;}
+    </style>
+</head>
+<body>
+    <div>
+        <h2>차트그리기-실습</h2>
+        <input type="text" name='m_data' id='m_data'>
+        <button type="button" onclick='chartBtn()'>데이타 가져오기</button>
+    </div>
+<script>
+    function chartBtn(){
+        alert('데이터를 가져옵니다.')
+        let input_data = $('#m_data').val()
+
+        let label_data=[];
+        let d_data=[];
+
+        $.ajax({
+            url:'/chart_json2/',
+            type:'get',
+            dataType:'json',
+            data:{'input_data':input_data},
+            success:function(data){
+                console.log('views엣서 넘어온 데이터 :'+data)
+                alert('성공'+data.l_qs)
+                for(var i=0;i<data.l_qs.length;i++){
+                    d_data.push(data.l_qs[i].cdate)
+                    label_data.push(data.l_qs[i].cyear)
+                }
+
+            },
+            error:function(){
+                alert('실패')
+            }
+        })//ajax
+
+    }//chartBtn
+</script>
+</body>
+</html>
