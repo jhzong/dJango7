@@ -1,6 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from member.models import Member
+
+def logout(request):
+    # session 삭제
+    request.session.clear()
+    
+    return redirect('/')
 
 def login(request):
     if request.method=='GET':
@@ -9,7 +15,17 @@ def login(request):
         id=request.POST.get('id')
         pw=request.POST.get('pw')
         print('넘어온 데이터 :',id,pw)
-        return render(request,"member/login.html")
+        
+        #id,pw체크
+        qs=Member.objects.filter(id=id,pw=pw)
+        if qs:
+            result=1
+            request.session['session_id']=id
+            request.session['session_name']=qs[0].name
+        else: result=0
+            
+        context={'result':result}
+        return render(request,"member/login.html",context)
         
     
 

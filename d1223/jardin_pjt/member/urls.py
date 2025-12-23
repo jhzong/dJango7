@@ -9,4 +9,5 @@ urlpatterns = [
     # id가 존재하는지 확인해 json으로 return
     path('idCheck/',views.idCheck,name='idCheck'),
     path('login/',views.login,name='login'),
+    path('logout/',views.logout,name='logout'),
 ]
