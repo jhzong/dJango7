@@ -165,10 +165,25 @@ from django.forms.models import model_to_dict
 from django.http import JsonResponse,HttpResponse # 전송할때 Json타입으로 변경해서 전송
 from django.core import serializers  # Json타입으로 전달된 데이터를 파이썬데이터(set)로 변경
 
+
 ※페이지네이터(하단넘버링)※
 from django.core.paginator import Paginator
 
 paginator=Paginator(qs,10)->1페이지에 10개씩
+def clist(request):
+qs=Board.objects.all().order_by('-bgroup','bstep')
+# 하단 페이지넘버링-------------------------------------
+# paginator는 요청페이지 번호가 있어야함.
+# 요청페이지 넘버:int타입
+page=int(request.GET.get('page',1))# 없으면 default=1
+paginator=Paginator(qs,10)
+list_qs=paginator.get_page(page)
+# //하단 페이지넘버링-----------------------------------
+
+context={'list':list_qs,'page':page}
+return render(request,'customer/clist.html',context)
+
+※검색※
 
 
 

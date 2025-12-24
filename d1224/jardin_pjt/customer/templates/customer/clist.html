@@ -66,7 +66,7 @@
 									<td class="left">
 										<a href="/customer/cview/{{c.bno}}/" class="lightgray">{{c.btitle}}</a>
 									</td>
-									<td>{{c.bdate}}</td>
+									<td>{{c.bdate|date:'Y-m-d H:i'}}</td>
 									<td class="tnone right">{{c.bhit}}</td>
 								</tr>
 								{% endfor %}
@@ -94,7 +94,7 @@
 								{% if p == page %}
 								<strong>{{p}}</strong>
 								{% else %}
-								<a href="/customer/clist/?page={{p}}">{{p}}</a>
+								<a href="/customer/clist/?page={{p}}&category={{category}}&search={{search}}">{{p}}</a>
 								{% endif %}
 							{% endif %}
 						{% endfor %}
@@ -116,6 +116,7 @@
 							<script>
 								function searchBtn(){
 									alert('검색합니다.')
+									searchFrm.submit()
 								}
 							</script>
 							<form action="/customer/clist/" method="get" name='searchFrm'>
