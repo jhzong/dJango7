@@ -165,7 +165,9 @@ from django.forms.models import model_to_dict
 from django.http import JsonResponse,HttpResponse # 전송할때 Json타입으로 변경해서 전송
 from django.core import serializers  # Json타입으로 전달된 데이터를 파이썬데이터(set)로 변경
 
-# from django.core.paginator import Paginator
+※페이지네이터(하단넘버링)※
+from django.core.paginator import Paginator
+
 paginator=Paginator(qs,10)->1페이지에 10개씩
 
 

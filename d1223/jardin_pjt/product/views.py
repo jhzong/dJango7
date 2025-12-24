@@ -84,11 +84,11 @@ def approve(request):
     response=requests.post(url,headers=headers,data=json.dumps(data,ensure_ascii=False))
     print('리턴받은 결과 : ',response)
     result=response.json()
-    print('결제 날짜 : ',result.get["created_at"])
+    print('결제 날짜 : ',result.get("created_at"))
     
     if result.get('aid'):
         #db에 저장<=결제정보
-        #결제정보=>payment.object.create()
+        #결제정보models에 저장=>payment.object.create()
         print('결제 성공')
         return redirect('/product/success/')
     
