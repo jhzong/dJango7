@@ -9,6 +9,24 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static'),
 ]
 
+※base.html 만들때 settings.py 추가구문(templates)※
+TEMPLATE_DIR = os.path.join(BASE_DIR,'templates')
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [TEMPLATE_DIR],<<이거추가
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
 ※models.py class 기본 frame※
 class Table(models.Model):
     a=models.AutoField(primary_key=True)# AutoField=Sequence
