@@ -56,7 +56,7 @@ def cview(request,bno):
     # 하단댓글
     comment_qs = Comment.objects.all().order_by('-cno')
     # bgroup 역순정렬, bstep 순차정렬
-    #이전글-----
+    # 이전글-----
     pre_qs = Board.objects.filter(bgroup__lt=qs.bgroup).order_by("-bgroup","bstep").first()
     # 답글달기가 포함 되어 있을때 쿼리문
     # pre_qs = Board.objects.filter(Q(bgroup__lt=qs[0].bgroup,bstep__lte=qs[0].bstep)|Q(bgroup=qs[0].bgroup,bstep__gt=qs[0].bstep)).order_by("-bgroup","bstep").first()
