@@ -10,4 +10,6 @@ urlpatterns = [
     path('idCheck/',views.idCheck,name='idCheck'),
     path('login/',views.login,name='login'),
     path('logout/',views.logout,name='logout'),
+    # 리엑트와 연결
+    path('userAll/',views.userAll,name='userAll'),
 ]

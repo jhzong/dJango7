@@ -44,3 +44,24 @@ def idCheck(request):
     
     context={'result':result}
     return JsonResponse(context)
+
+# id가 존재하는지 확인해 json으로 return
+def userAll(request):
+    #db확인
+    print('id :',request.GET.get('id',''))
+    print('name :',request.GET.get('name',''))
+    qs=Member.objects.all()
+    l_qs=list(qs.values())
+    print("l_qs 데이터 형태 : ",l_qs)
+    context = {'arrey':l_qs}
+    return JsonResponse(context)
+
+# id가 존재하는지 확인해 json으로 return
+def userInsert(request):
+    #db확인
+    request.POST.get()
+    qs=Member.objects.all()
+    l_qs=list(qs.values())
+    print("l_qs 데이터 형태 : ",l_qs)
+    context = {'arrey':l_qs}
+    return JsonResponse(context)
