@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 from member.models import Member
+import json
 
 def logout(request):
     # session 삭제
@@ -45,23 +46,27 @@ def idCheck(request):
     context={'result':result}
     return JsonResponse(context)
 
-# id가 존재하는지 확인해 json으로 return
+# json으로 data 넘기기
 def userAll(request):
-    #db확인
+    # db확인
     print('id :',request.GET.get('id',''))
     print('name :',request.GET.get('name',''))
     qs=Member.objects.all()
     l_qs=list(qs.values())
-    print("l_qs 데이터 형태 : ",l_qs)
+    # print("l_qs 데이터 형태 : ",l_qs)
     context = {'arrey':l_qs}
     return JsonResponse(context)
 
-# id가 존재하는지 확인해 json으로 return
-def userInsert(request):
-    #db확인
-    request.POST.get()
-    qs=Member.objects.all()
-    l_qs=list(qs.values())
-    print("l_qs 데이터 형태 : ",l_qs)
-    context = {'arrey':l_qs}
-    return JsonResponse(context)
+# json으로 data 넘기기
+# def userInsert(request):
+#     # db확인
+#     # request.POST.get('id','')
+#     if request.method=='POST':
+#         body=json.loads(request.body)
+#         id=body.get('id')
+#         print('id :',id)
+        
+#         qs=Member.objects.all()
+#         l_qs=list(qs.values())
+#         context = {'arrey':l_qs}
+#         return JsonResponse(context)
