@@ -3,6 +3,8 @@ from django.http import JsonResponse
 from member.models import Member
 import json
 
+
+
 def logout(request):
     # session 삭제
     request.session.clear()

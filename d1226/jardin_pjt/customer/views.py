@@ -5,6 +5,13 @@ from django.core.paginator import Paginator
 from django.db.models import Q,F,Sum,Count
 from comment.models import Comment
 
+# get,post,put,delete 방식->지정
+from rest_framework.decorators import api_view
+# JsonResponse->Response
+from rest_framework.response import Response
+# status : 200,404,500 상태값
+from rest_framework import status
+
 # 글쓰기페이지
 def cwrite(request):
     if request.method=="GET":
